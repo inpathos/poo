@@ -15,7 +15,7 @@ class qtsNegativos {
             if(atual < 0) negativos++;
         }
 
-        System.out.println("Dos valores digitados, " + negativos + " são negativos.");
+        System.out.println("Dos "+ n + " valores digitados, " + negativos + " são negativos.");
 
     }
 
