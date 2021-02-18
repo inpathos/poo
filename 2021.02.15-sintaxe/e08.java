@@ -1,29 +1,64 @@
-import java.util.Scanner;
+matrizimport java.util.Scanner;
 
 
 class quadradoMagico {
-    private static bool isQuadradoMagico(int[][] m, int n){
-        int i, j, soma, atual = 0;
-        for(i = 0; i < n; i++){
-            for(j = 0; j < n; j++){
-                atual += m[i][j];
+    private static Boolean isQuadradoMagico(int[][] matriz, int dimensao){
+        int i, j, linha, coluna, diagonal1 = 0, diagonal2 = 0;
+        for(i = 0; i < dimensao; i++) diagonal1 += matriz[i][i];
+        System.out.println("teste1");
+        for(i = 0; i < dimensao; i++){
+            linha = 0;
+            for(j = 0; j < dimensao; j++){
+                linha += matriz[i][j];
+                if(i + j == dimensao - 1) diagonal2 += matriz[i][j];
             }
-            soma = atual;
+            if(linha != diagonal1) return false;
         }
+        System.out.println("teste2");
+        if(diagonal2 != diagonal1) return false;
+        System.out.println("teste3");
+        for(j = 0; j < dimensao; j++){
+            coluna = 0;
+            for(i = 0; i < dimensao; i++) {
+                coluna += matriz[i][j];
+            }
+            if(coluna != diagonal1) return false;
+        }
+        System.out.println("teste4");
+        return true;
     }
 
+    private static int[][] criarQuadradoMagico(int dimensao){
+        int i, j;
+        Scanner teclado = new Scanner(System.in);
+        int[][] matriz = new int[dimensao][dimensao];
+        for(i = 0; i < dimensao; i++){
+            for(j = 0; j < dimensao; j++){
+                matriz[i][j] = teclado.nextInt();
+            }
+        }
+        return matriz;
+    }
+
+    private static void imprimeQuadradoMagico(int[][] matriz, int dimensao){
+        int i, j;
+        for(i = 0; i < dimensao; i++) {
+            System.out.print("\n\t");
+            for(j = 0; j < dimensao; j++) {
+                System.out.print(matriz[i][j] + "\t");
+            }
+        }
+        System.out.print("\n");
+    }
 
     public static void main(String[] args) {
         Scanner teclado = new Scanner(System.in);
         int n, i, j;
+        int[][] matriz;
         n = teclado.nextInt();
-        int[][] matriz = new int[n][n];
-        for(i = 0; i < n; i++){
-            for(j = 0; j < n; j++){
-                matriz[i][j] = teclado.nextInt();
-            }
-        }
-
+        matriz = criarQuadradoMagico(dimensao);
+        imprimeQuadradoMagico(matriz, dimensao);
+        System.out.println(isQuadradoMagico(matriz, dimensao));
     }
 
 }
